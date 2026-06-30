@@ -1,4 +1,3 @@
-import base64
 import os
 from typing import Optional
 
@@ -16,7 +15,8 @@ class GeminiClient(BaseLLMClient):
         genai.configure(api_key=os.environ["GEMINI_API_KEY"])
         self.model = genai.GenerativeModel(model_name)
 
-    def query(self, question: str, image_path: Optional[str] = None) -> str:
+    def query(self, question: str, image_path: Optional[str] = None) -> dict:
+        """Returns {"text": str, "input_tokens": int, "output_tokens": int}"""
         parts = []
 
         if image_path:
@@ -29,4 +29,10 @@ class GeminiClient(BaseLLMClient):
             parts,
             generation_config=genai.types.GenerationConfig(temperature=0),
         )
-        return response.text.strip()
+
+        usage = response.usage_metadata
+        return {
+            "text": response.text.strip(),
+            "input_tokens": usage.prompt_token_count,
+            "output_tokens": usage.candidates_token_count,
+        }

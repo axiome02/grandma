@@ -14,7 +14,8 @@ class AnthropicClient(BaseLLMClient):
         super().__init__(model_name)
         self.client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-    def query(self, question: str, image_path: Optional[str] = None) -> str:
+    def query(self, question: str, image_path: Optional[str] = None) -> dict:
+        """Returns {"text": str, "input_tokens": int, "output_tokens": int}"""
         content = []
 
         if image_path:
@@ -24,11 +25,7 @@ class AnthropicClient(BaseLLMClient):
             mime = "image/jpeg" if ext in ("jpg", "jpeg") else f"image/{ext}"
             content.append({
                 "type": "image",
-                "source": {
-                    "type": "base64",
-                    "media_type": mime,
-                    "data": image_data,
-                },
+                "source": {"type": "base64", "media_type": mime, "data": image_data},
             })
 
         content.append({"type": "text", "text": question})
@@ -38,4 +35,8 @@ class AnthropicClient(BaseLLMClient):
             max_tokens=1024,
             messages=[{"role": "user", "content": content}],
         )
-        return response.content[0].text.strip()
+        return {
+            "text": response.content[0].text.strip(),
+            "input_tokens": response.usage.input_tokens,
+            "output_tokens": response.usage.output_tokens,
+        }

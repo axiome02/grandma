@@ -1,20 +1,42 @@
 [
   {
     "id": "q_001",
-    "type": "text",
     "difficulty": "95%",
-    "category": "logical deduction",
-    "question": "All roses are flowers. Some flowers fade quickly. Therefore, do all roses fade quickly?",
-    "image": null,
-    "answer": "No. The conclusion does not follow. Some flowers fade quickly, but that does not mean all roses do."
+    "category": "digit swap — arithmetic",
+    "question": "Which two digits do you need to swap to make this equation correct?\n571 + 962 = 840",
+    "image": "images/q_001.png",
+    "answer": "Swap 9 and 2. In the second number, 962 becomes 269: 571 + 269 = 840."
   },
   {
     "id": "q_002",
-    "type": "text",
-    "difficulty": "95%",
-    "category": "common sense",
-    "question": "A doctor gives you 3 pills and tells you to take one every half hour. How long will the pills last?",
-    "image": null,
-    "answer": "1 hour. You take the first pill at 0 min, second at 30 min, third at 60 min."
+    "difficulty": "50%",
+    "category": "digit swap — arithmetic",
+    "question": "Which two digits do you need to swap to make this equation correct?\n154 + 362 = 813",
+    "image": "images/q_002.png",
+    "answer": "Swap 1 and 4. In the first number, 154 becomes 451: 451 + 362 = 813."
+  },
+  {
+    "id": "q_003",
+    "difficulty": "50%",
+    "category": "digit swap — arithmetic",
+    "question": "Which two digits do you need to swap to make this equation correct?\n738 + 214 = 592",
+    "image": "images/q_003.png",
+    "answer": "Swap 3 and 7. In the first number, 738 becomes 378: 378 + 214 = 592."
+  },
+  {
+    "id": "q_004",
+    "difficulty": "10%",
+    "category": "digit swap — arithmetic",
+    "question": "Which two digits do you need to swap to make this equation correct?\n741 - 265 = 746",
+    "image": "images/q_004.png",
+    "answer": "Swap 7 and 4 in the result. 746 becomes 476: 741 - 265 = 476."
+  },
+  {
+    "id": "q_005",
+    "difficulty": "1%",
+    "category": "digit swap — arithmetic",
+    "question": "Which two digits do you need to swap to make this equation correct?\n4792 + 3186 = 7538",
+    "image": "images/q_005.png",
+    "answer": "Swap 5 and 9. The 5 (tens of the first number) and the 9 (hundreds of the result) are swapped: 4752 + 3186 = 7938."
   }
 ]

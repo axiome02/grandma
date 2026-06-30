@@ -14,7 +14,8 @@ class OpenAIClient(BaseLLMClient):
         super().__init__(model_name)
         self.client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-    def query(self, question: str, image_path: Optional[str] = None) -> str:
+    def query(self, question: str, image_path: Optional[str] = None) -> dict:
+        """Returns {"text": str, "input_tokens": int, "output_tokens": int}"""
         messages = []
 
         if image_path:
@@ -25,10 +26,7 @@ class OpenAIClient(BaseLLMClient):
             messages.append({
                 "role": "user",
                 "content": [
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:{mime};base64,{image_data}"},
-                    },
+                    {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{image_data}"}},
                     {"type": "text", "text": question},
                 ],
             })
@@ -40,4 +38,8 @@ class OpenAIClient(BaseLLMClient):
             messages=messages,
             temperature=0,
         )
-        return response.choices[0].message.content.strip()
+        return {
+            "text": response.choices[0].message.content.strip(),
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
+        }
