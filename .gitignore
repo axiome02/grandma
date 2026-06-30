@@ -1,0 +1,19 @@
+# API keys — never commit this file
+.env
+
+# Results are local, not versioned
+results/*
+!results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
